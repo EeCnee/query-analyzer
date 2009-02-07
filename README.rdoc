@@ -27,7 +27,7 @@ In your environment.rb, *after* the Rails::Initializer block:
 
   require 'query_analyzer'
   
-*NOTE THE UNDERSCORE!* +require 'query-analyzer'+ won't find it. 
+Please *NOTE THE UNDERSCORE!* +require 'query-analyzer'+ won't find it. 
 
 = Example Use
 
