@@ -1,0 +1,6 @@
+= Changelog
+
+== Version 0.1.0
+
+* Turned it in to a gem. 
+* Changed the selection logic such that it shows all queries again. 

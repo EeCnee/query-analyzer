@@ -27,7 +27,7 @@ class Array
 end
 
 
-
+# TODO: Postgres? Oracle? Firebird? 
 module ActiveRecord
   module ConnectionAdapters
     class MysqlAdapter < AbstractAdapter
@@ -37,13 +37,15 @@ module ActiveRecord
         def select(sql, name = nil)
           query_results = select_without_analyzer(sql, name)
           
+          # I went back to showing all queries.  This makes for a heavy log file, but you pick up 
+          # things like filesorts (which the latest plugin wouldn't have caught).
+          
           if @logger and @logger.level == Logger::DEBUG
             @logger.debug(
               ActiveRecord::Base.silence do
-                explain_results = select_without_analyzer("explain #{sql}", name)
-                format_log_entry("\033[1;34m############ FIXME - UNOPTIMIZED QUERY for #{name} ############ \033[0m\n",
-                  "#{explain_results.qa_columnized}\n"
-                ) if explain_results[0]["rows"].to_i > 100 && sql =~ / where[\s(]/i
+                format_log_entry("\033[1;34mAnalyzing #{name}  \033[0m\n\n",
+                  "\033[1;34m#{select_without_analyzer("explain #{sql}", name).qa_columnized}  \033[0m\n\n"
+                ) 
               end
             ) if sql =~ /^select/i
           end          
