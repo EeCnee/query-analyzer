@@ -1,5 +1,9 @@
 = Changelog
 
+== Version 0.1.1
+
+* using jeweler for managing and releasing query-analyzer
+
 == Version 0.1.0
 
 * Turned it in to a gem. 
